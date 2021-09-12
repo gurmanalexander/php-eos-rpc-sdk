@@ -32,12 +32,10 @@ class WalletController
     /**
      * WalletController constructor.
      *
-     * @param SettingsInterface $settings
      * @param HttpInterface     $client
      */
-    public function __construct(SettingsInterface $settings, HttpInterface $client)
+    public function __construct(HttpInterface $client)
     {
-        $this->settings = $settings;
         $this->client = $client;
     }
 
@@ -50,7 +48,7 @@ class WalletController
      */
     protected function buildUrl($endpoint): string
     {
-        return $this->settings->rpcKeosd() . '/' . $this->version . $endpoint;
+        return getenv('RPC_KEOSD_URL') . '/' . $this->version . $endpoint;
     }
 
     /**
