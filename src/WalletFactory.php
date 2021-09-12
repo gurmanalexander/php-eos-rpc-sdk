@@ -32,11 +32,9 @@ class WalletFactory
     public function api(string $path = null, string $env = '.env', SettingsInterface $settings = null, HttpInterface $http = null): WalletController
     {
         $path = $path ?? dirname(__DIR__);
-        $settings = $settings ?? new DotenvAdapter(new Dotenv($path, $env));
         $http = $http ?? new CurlAdapter(new Curl);
 
         return new WalletController(
-            $settings,
             $http
         );
     }
